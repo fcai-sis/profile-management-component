@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { UPDATE_FIELDS } from "../../data/UPDATE_FIELDS";
 
 /**
  * Update the student's profile info
@@ -23,10 +24,12 @@ const handler = async (req: HandlerRequest, res: Response) => {
     return res.status(404).send("Student not found");
   }
 
-  student.profile = {
-    ...student.profile,
-    ...profileUpdates,
-  };
+  // Update only the allowed fields
+  for (const field in profileUpdates) {
+    if (UPDATE_FIELDS.includes(field)) {
+      student[field] = profileUpdates[field];
+    }
+  }
 
   await student.save();
 
