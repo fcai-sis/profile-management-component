@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { asyncHandler } from "@fcai-sis/shared-utilities";
 
-import updateStudentProfileHandler from "./logic/handlers/updateProfile.handler";
+import updateStudentProfileHandler from "./logic/handlers/updateStudentProfile.handler";
 import updateStudentProfileValidator from "./logic/middlewares/validateUpdateFields.middleware";
 import ensureStudentIdInParamsMiddleware from "./logic/middlewares/ensureStudentIdInParams.middleware";
 
