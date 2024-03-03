@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UPDATE_FIELDS } from "../../data/UPDATE_FIELDS";
+import { STUDENT_PROFILE_FIELDS } from "../../data/STUDENT_PROFILE_FIELDS";
 import { StudentModel } from "@fcai-sis/shared-models";
 
 /**
@@ -19,7 +19,6 @@ const handler = async (req: HandlerRequest, res: Response) => {
   const { studentId } = req.params;
   const profileUpdates = req.body;
 
-  // TODO : put studentModel in shared-models
   const student = await StudentModel.findById(studentId);
   if (!student) {
     return res.status(404).send("Student not found");
@@ -27,7 +26,7 @@ const handler = async (req: HandlerRequest, res: Response) => {
 
   // Check if the fields to be updated are valid
   const validFields = Object.keys(profileUpdates).every((field) =>
-    UPDATE_FIELDS.includes(field)
+    STUDENT_PROFILE_FIELDS.includes(field)
   );
 
   if (!validFields) {
@@ -39,7 +38,6 @@ const handler = async (req: HandlerRequest, res: Response) => {
     // TODO: what the hell is this type
     student[field] = value;
   });
-
 
   await student.save();
 
