@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { UPDATE_FIELDS } from "../../data/UPDATE_FIELDS";
+import { STUDENT_PROFILE_FIELDS } from "../../data/STUDENT_PROFILE_FIELDS";
 
 import logger from "../../../../core/logger";
 
@@ -19,7 +19,7 @@ const updateStudentProfileValidator = [
     );
 
     // if the request body contains any field other than those in UPDATE_FIELDS, return an error
-    const allowedFields = UPDATE_FIELDS;
+    const allowedFields = STUDENT_PROFILE_FIELDS;
     const receivedFields = Object.keys(req.body);
     const invalidFields = receivedFields.filter(
       (field) => !allowedFields.includes(field)
