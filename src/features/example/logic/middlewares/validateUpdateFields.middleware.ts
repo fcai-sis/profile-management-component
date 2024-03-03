@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { STUDENT_PROFILE_FIELDS } from "../../data/STUDENT_PROFILE_FIELDS";
+import { STUDENT_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
 
 import logger from "../../../../core/logger";
 
