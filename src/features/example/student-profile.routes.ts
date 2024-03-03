@@ -7,7 +7,7 @@ import updateStudentProfileValidator from "./logic/middlewares/validateUpdateFie
 import ensureStudentIdInParamsMiddleware from "./logic/middlewares/ensureStudentIdInParams.middleware";
 
 export default (router: Router) => {
-  router.post(
+  router.patch(
     "/update-profile/:studentId",
 
     // Validate student ID
