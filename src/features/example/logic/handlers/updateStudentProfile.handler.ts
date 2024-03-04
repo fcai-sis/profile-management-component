@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { STUDENT_PROFILE_FIELDS } from "../../data/STUDENT_PROFILE_FIELDS";
+import { STUDENT_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
 import { StudentModel } from "@fcai-sis/shared-models";
 
 /**
@@ -36,7 +36,7 @@ const handler = async (req: HandlerRequest, res: Response) => {
   // Update the student's profile info with the new data
   Object.entries(profileUpdates).forEach(([field, value]) => {
     // TODO: what the hell is this type
-    student[field] = value;
+    (student as any)[field] = value;
   });
 
   await student.save();
