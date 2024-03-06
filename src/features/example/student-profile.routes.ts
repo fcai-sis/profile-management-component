@@ -5,12 +5,10 @@ import { asyncHandler } from "@fcai-sis/shared-utilities";
 import updateStudentProfileHandler from "./logic/handlers/updateStudentProfile.handler";
 import updateStudentProfileValidator from "./logic/middlewares/validateStudentUpdateFields.middleware";
 import ensureUserIdInParamsMiddleware from "./logic/middlewares/ensureUserIdInParams.middleware";
-import updateInstructorProfileValidator from "./logic/middlewares/validateInstructorUpdateFields.middleware";
-import updateInstructorProfileHandler from "./logic/handlers/updateInstructorProfile.handler";
 
-export default (router: Router) => {
+const studentProfileRoutes = (router: Router) => {
   router.patch(
-    "/update-student-profile/:userId",
+    "/update/:userId",
 
     // Validate student ID
     ensureUserIdInParamsMiddleware,
@@ -21,15 +19,5 @@ export default (router: Router) => {
     // Handle example request
     asyncHandler(updateStudentProfileHandler)
   );
-
-  router.patch(
-    "/update-instructor-profile/:userId",
-    // Validate Instructor ID
-    ensureUserIdInParamsMiddleware,
-
-    // Validate profile fields
-    updateInstructorProfileValidator,
-
-    asyncHandler(updateInstructorProfileHandler)
-  );
 };
+export default studentProfileRoutes;
