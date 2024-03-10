@@ -3,15 +3,15 @@ import { Router } from "express";
 import { asyncHandler } from "@fcai-sis/shared-utilities";
 
 import updateStudentProfileHandler from "./logic/handlers/updateStudentProfile.handler";
-import updateStudentProfileValidator from "./logic/middlewares/validateUpdateFields.middleware";
-import ensureStudentIdInParamsMiddleware from "./logic/middlewares/ensureStudentIdInParams.middleware";
+import updateStudentProfileValidator from "./logic/middlewares/validateStudentUpdateFields.middleware";
+import ensureUserIdInParamsMiddleware from "./logic/middlewares/ensureUserIdInParams.middleware";
 
-export default (router: Router) => {
+const studentProfileRoutes = (router: Router) => {
   router.patch(
-    "/update-profile/:studentId",
+    "/update/:userId",
 
     // Validate student ID
-    ensureStudentIdInParamsMiddleware,
+    ensureUserIdInParamsMiddleware,
 
     // Validate example message
     updateStudentProfileValidator,
@@ -20,3 +20,4 @@ export default (router: Router) => {
     asyncHandler(updateStudentProfileHandler)
   );
 };
+export default studentProfileRoutes;

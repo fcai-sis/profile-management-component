@@ -3,13 +3,13 @@ import * as validator from "express-validator";
 
 const middlewares = [
   validator
-    .param("studentId")
+    .param("userId")
 
     .exists()
-    .withMessage("Student ID is required")
+    .withMessage("ID is required")
 
     .isMongoId()
-    .withMessage("Student ID must be a valid Mongo ID"),
+    .withMessage("ID must be a valid Mongo ID"),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validator.validationResult(req);
@@ -28,5 +28,5 @@ const middlewares = [
   },
 ];
 
-const ensureStudentIdInParamsMiddleware = middlewares;
-export default ensureStudentIdInParamsMiddleware;
+const ensureUserIdInParamsMiddleware = middlewares;
+export default ensureUserIdInParamsMiddleware;

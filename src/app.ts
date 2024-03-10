@@ -4,7 +4,7 @@ import helmet from "helmet";
 import compression from "compression";
 import express, { NextFunction, Request, Response } from "express";
 
-import { studentsProfileRouter } from "./router";
+import { instructorProfileRouter, studentsProfileRouter } from "./router";
 import { isDev } from "./env";
 import logger from "./core/logger";
 
@@ -46,7 +46,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Mount API routes
-app.use("/student/profile", studentsProfileRouter());
+app.use("/student-profile", studentsProfileRouter());
+app.use("/instructor-profile", instructorProfileRouter());
 
 // TODO: Custom 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
