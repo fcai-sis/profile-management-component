@@ -1,7 +1,9 @@
 import { Router } from "express";
-
-import studentProfileRoutes from "./features/example/student-profile.routes";
-import instructorProfileRoutes from "./features/example/instructor-profile.routes";
+import {
+  employeeProfileRoutes,
+  instructorProfileRoutes,
+  studentProfileRoutes,
+} from "./features/profile/profile.routes";
 
 export const studentsProfileRouter = (): Router => {
   const router = Router();
@@ -12,5 +14,11 @@ export const studentsProfileRouter = (): Router => {
 export const instructorProfileRouter = (): Router => {
   const router = Router();
   instructorProfileRoutes(router);
+  return router;
+};
+
+export const employeeProfileRouter = (): Router => {
+  const router = Router();
+  employeeProfileRoutes(router);
   return router;
 };
