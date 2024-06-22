@@ -26,13 +26,25 @@ const updateEmployeeProfileHandler = async (
     user: user.userId,
   });
 
+  if (!employeeToBeUpdated) {
+    return res.status(404).json({
+      error: {
+        message: "Employee not found",
+      },
+    });
+  }
+
   // Check if the fields to be updated are valid
   const validFields = Object.keys(employee).every((field) =>
     EMPLOYEE_PROFILE_FIELDS.includes(field)
   );
 
   if (!validFields) {
-    return res.status(400).send("Invalid fields to update");
+    return res.status(400).json({
+      error: {
+        message: "Invalid fields to update",
+      },
+    });
   }
 
   // Update the employee's profile info with the new data
@@ -43,7 +55,7 @@ const updateEmployeeProfileHandler = async (
   await employeeToBeUpdated.save();
 
   const response = {
-    message: "Profile updated successfully",
+    message: "Employee profile updated successfully",
   };
 
   return res.status(200).json(response);

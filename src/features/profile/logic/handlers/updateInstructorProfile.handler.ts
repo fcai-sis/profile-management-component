@@ -1,48 +1,64 @@
 import { Request, Response } from "express";
 import { INSTRUCTOR_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
-import { InstructorModel } from "@fcai-sis/shared-models";
+import { InstructorModel, InstructorType } from "@fcai-sis/shared-models";
+import { TokenPayload } from "@fcai-sis/shared-middlewares";
 
 /**
  * Update the instructor's profile info
  */
 
 type HandlerRequest = Request<
-  {
-    instructorId: string;
-  },
+  {},
   {},
   {
-    [key: string]: string;
+    instructor: Partial<InstructorType>;
+    user: TokenPayload;
   }
 >;
 
-const handler = async (req: HandlerRequest, res: Response) => {
-  const { instructorId } = req.params;
-  const profileUpdates = req.body;
+const updateInstructorProfileHandler = async (
+  req: HandlerRequest,
+  res: Response
+) => {
+  const { user, instructor } = req.body;
 
-  const instructor = await InstructorModel.findById(instructorId);
-  if (!instructor) {
-    return res.status(404).send("Instructor not found");
+  const instructorToBeUpdated = await InstructorModel.findOne({
+    user: user.userId,
+  });
+
+  if (!instructorToBeUpdated) {
+    return res.status(404).json({
+      error: {
+        message: "Instructor not found",
+      },
+    });
   }
 
   // Check if the fields to be updated are valid
-  const validFields = Object.keys(profileUpdates).every((field) =>
+  const validFields = Object.keys(instructor).every((field) =>
     INSTRUCTOR_PROFILE_FIELDS.includes(field)
   );
 
   if (!validFields) {
-    return res.status(400).send("Invalid fields to update");
+    return res.status(400).json({
+      error: {
+        message: "Invalid fields to update",
+      },
+    });
   }
 
   // Update the instructor's profile info with the new data
-  Object.entries(profileUpdates).forEach(([field, value]) => {
-    instructor[field] = value;
+  Object.entries(instructor).forEach(([field, value]) => {
+    instructorToBeUpdated[field] = value;
   });
 
-  await instructor.save();
+  await instructorToBeUpdated.save();
 
-  return res.status(200).send(instructor);
+  const response = {
+    message: "Instructor profile updated successfully",
+  };
+
+  return res.status(200).json(response);
 };
 
-const updateInstructorProfileHandler = handler;
 export default updateInstructorProfileHandler;

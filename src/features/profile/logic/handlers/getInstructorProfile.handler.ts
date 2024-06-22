@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
-import { EmployeeModel } from "@fcai-sis/shared-models";
-import { EMPLOYEE_PROFILE_FIELDS } from "../../../../features/profile/data/UPDATE_PROFILE_FIELDS";
+import { InstructorModel } from "@fcai-sis/shared-models";
+import { INSTRUCTOR_PROFILE_FIELDS } from "../../../../features/profile/data/UPDATE_PROFILE_FIELDS";
 
 type HandlerRequest = Request<
   {},
@@ -12,29 +12,29 @@ type HandlerRequest = Request<
 >;
 
 /*
- * Get Employee profile
+ * Get Instructor profile
  * */
-const getEmployeeProfileHandler = async (
+const getInstructorProfileHandler = async (
   req: HandlerRequest,
   res: Response
 ) => {
   const { user } = req.body;
 
-  const employee = await EmployeeModel.findOne({
+  const instructor = await InstructorModel.findOne({
     user: user.userId,
   });
 
-  if (!employee) {
+  if (!instructor) {
     return res.status(404).send({
       error: {
-        message: "Employee not found",
+        message: "Instructor not found",
       },
     });
   }
 
-  const profileFields = EMPLOYEE_PROFILE_FIELDS.map((field) => {
+  const profileFields = INSTRUCTOR_PROFILE_FIELDS.map((field) => {
     return {
-      [field]: employee[field],
+      [field]: instructor[field],
     };
   });
 
@@ -44,4 +44,4 @@ const getEmployeeProfileHandler = async (
 
   return res.status(200).json(response);
 };
-export default getEmployeeProfileHandler;
+export default getInstructorProfileHandler;

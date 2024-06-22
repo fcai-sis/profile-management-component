@@ -1,19 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 import { INSTRUCTOR_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
 
 import logger from "../../../../core/logger";
 
 const updateInstructorProfileValidator = [
-  // Validate the student's profile update request body
-  body("phoneNumber")
-    .optional()
-    .isMobilePhone("any", { strictMode: false })
-    .withMessage("Invalid phone number"),
-
-  body("address").optional().isString().withMessage("Invalid address"),
-  body("officeHours").optional().isString().withMessage("Invalid office hours"),
-
   (req: Request, res: Response, next: NextFunction) => {
     logger.debug(
       `Validating update instructor profile req body: ${JSON.stringify(
@@ -49,12 +40,6 @@ const updateInstructorProfileValidator = [
         },
       });
     }
-
-    if (req.body.address) req.body.address = req.body.address.trim();
-    if (req.body.phoneNumber)
-      req.body.phoneNumber = req.body.phoneNumber.trim();
-    if (req.body.officeHours)
-      req.body.officeHours = req.body.officeHours.trim();
 
     next();
   },
