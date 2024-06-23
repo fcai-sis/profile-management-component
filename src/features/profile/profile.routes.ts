@@ -8,6 +8,7 @@ import { Role, checkRole } from "@fcai-sis/shared-middlewares";
 import getEmployeeProfileHandler from "./logic/handlers/getEmployeeProfile.handler";
 import updateEmployeeProfileHandler from "./logic/handlers/updateEmployeeProfile.handler";
 import getInstructorProfileHandler from "./logic/handlers/getInstructorProfile.handler";
+import getStudentProfileHandler from "./logic/handlers/getStudentProfile.handler";
 
 export const instructorProfileRoutes = (router: Router) => {
   router.get(
@@ -27,6 +28,12 @@ export const studentProfileRoutes = (router: Router) => {
     "/",
     checkRole([Role.STUDENT]),
     asyncHandler(updateStudentProfileHandler)
+  );
+
+  router.get(
+    "/",
+    checkRole([Role.STUDENT]),
+    asyncHandler(getStudentProfileHandler)
   );
 };
 
