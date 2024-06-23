@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { STUDENT_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
+import { EDITABLE_STUDENT_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
 import { StudentModel, StudentType } from "@fcai-sis/shared-models";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
 
@@ -34,7 +34,7 @@ const updateStudentProfileHandler = async (
 
   // Check if the fields to be updated are valid
   const validFields = Object.keys(student).every((field) =>
-    STUDENT_PROFILE_FIELDS.includes(field)
+    EDITABLE_STUDENT_PROFILE_FIELDS.includes(field)
   );
 
   if (!validFields) {
