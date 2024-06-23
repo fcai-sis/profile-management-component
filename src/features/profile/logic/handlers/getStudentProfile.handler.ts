@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
 import { StudentModel } from "@fcai-sis/shared-models";
-import { STUDENT_PROFILE_FIELDS } from "../../../../features/profile/data/UPDATE_PROFILE_FIELDS";
+import {
+  EDITABLE_STUDENT_PROFILE_FIELDS,
+  IMMUTABLE_STUDENT_PROFILE_FIELDS,
+} from "../../../../features/profile/data/UPDATE_PROFILE_FIELDS";
 
 type HandlerRequest = Request<
   {},
@@ -29,14 +32,23 @@ const getStudentProfileHandler = async (req: HandlerRequest, res: Response) => {
     });
   }
 
-  const profileFields = STUDENT_PROFILE_FIELDS.map((field) => {
+  const editableProfileFields = EDITABLE_STUDENT_PROFILE_FIELDS.map((field) => {
     return {
       [field]: student[field],
     };
   });
 
+  const immutableProfileFields = IMMUTABLE_STUDENT_PROFILE_FIELDS.map(
+    (field) => {
+      return {
+        [field]: student[field],
+      };
+    }
+  );
+
   const response = {
-    profile: profileFields,
+    editableProfileFields,
+    immutableProfileFields,
   };
 
   return res.status(200).json(response);
