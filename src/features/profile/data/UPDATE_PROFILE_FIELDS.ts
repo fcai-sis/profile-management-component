@@ -1,7 +1,10 @@
 import {
   EmployeeType,
+  InstructorType,
   StudentType,
+  TeachingAssistantType,
 } from "@fcai-sis/shared-models";
+
 // TODO : Add the fields that you want to update in the profile page
 export const EDITABLE_STUDENT_PROFILE_FIELDS: (keyof StudentType)[] = [
   "fullName",
@@ -19,13 +22,13 @@ export const IMMUTABLE_STUDENT_PROFILE_FIELDS: (keyof StudentType)[] = [
   "birthPlace",
   "nationality",
 ];
-export const INSTRUCTOR_PROFILE_FIELDS = [
-  "phoneNumber",
-  "address",
+export const INSTRUCTOR_PROFILE_FIELDS: (keyof InstructorType)[] = [
   "officeHours",
 ];
 
-export const TA_PROFILE_FIELDS = ["phoneNumber", "address", "officeHours"];
+export const TA_PROFILE_FIELDS: (keyof TeachingAssistantType)[] = [
+  "officeHours",
+];
 
 export const EMPLOYEE_PROFILE_FIELDS: (keyof EmployeeType)[] = [
   "fullName",
