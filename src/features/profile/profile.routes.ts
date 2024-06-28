@@ -13,12 +13,12 @@ import getStudentProfileHandler from "./logic/handlers/getStudentProfile.handler
 export const instructorProfileRoutes = (router: Router) => {
   router.get(
     "/",
-    checkRole([Role.INSTUCTOR]),
+    checkRole([Role.INSTRUCTOR]),
     asyncHandler(getInstructorProfileHandler)
   );
   router.patch(
     "/",
-    checkRole([Role.INSTUCTOR]),
+    checkRole([Role.INSTRUCTOR]),
     asyncHandler(updateInstructorProfileHandler)
   );
 };
