@@ -36,7 +36,7 @@ const updateInstructorProfileHandler = async (
 
   // Check if the fields to be updated are valid
   const validFields = Object.keys(instructor).every((field) =>
-    INSTRUCTOR_PROFILE_FIELDS.includes(field)
+    INSTRUCTOR_PROFILE_FIELDS.includes(field as any)
   );
 
   if (!validFields) {

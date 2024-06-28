@@ -36,7 +36,7 @@ const updateEmployeeProfileHandler = async (
 
   // Check if the fields to be updated are valid
   const validFields = Object.keys(employee).every((field) =>
-    EMPLOYEE_PROFILE_FIELDS.includes(field)
+    EMPLOYEE_PROFILE_FIELDS.includes(field as any)
   );
 
   if (!validFields) {

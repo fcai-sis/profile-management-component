@@ -34,7 +34,7 @@ const updateStudentProfileHandler = async (
 
   // Check if the fields to be updated are valid
   const validFields = Object.keys(student).every((field) =>
-    EDITABLE_STUDENT_PROFILE_FIELDS.includes(field)
+    EDITABLE_STUDENT_PROFILE_FIELDS.includes(field as any)
   );
 
   if (!validFields) {

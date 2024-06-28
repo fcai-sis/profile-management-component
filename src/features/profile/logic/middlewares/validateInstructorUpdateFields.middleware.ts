@@ -16,7 +16,7 @@ const updateInstructorProfileValidator = [
     const allowedFields = INSTRUCTOR_PROFILE_FIELDS;
     const receivedFields = Object.keys(req.body);
     const invalidFields = receivedFields.filter(
-      (field) => !allowedFields.includes(field)
+      (field) => !allowedFields.includes(field as any)
     );
     if (invalidFields.length > 0) {
       logger.debug(
