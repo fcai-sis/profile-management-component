@@ -23,10 +23,12 @@ export const IMMUTABLE_STUDENT_PROFILE_FIELDS: (keyof StudentType)[] = [
   "nationality",
 ];
 export const INSTRUCTOR_PROFILE_FIELDS: (keyof InstructorType)[] = [
+  "fullName",
   "officeHours",
 ];
 
 export const TA_PROFILE_FIELDS: (keyof TeachingAssistantType)[] = [
+  "fullName",
   "officeHours",
 ];
 
