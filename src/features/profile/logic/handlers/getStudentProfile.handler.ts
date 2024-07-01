@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
-import { StudentModel } from "@fcai-sis/shared-models";
+import { StudentModel, studentLocalizedFields } from "@fcai-sis/shared-models";
 import {
   EDITABLE_STUDENT_PROFILE_FIELDS,
   IMMUTABLE_STUDENT_PROFILE_FIELDS,

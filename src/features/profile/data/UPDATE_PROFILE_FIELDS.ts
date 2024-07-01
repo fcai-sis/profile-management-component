@@ -11,6 +11,7 @@ export const EDITABLE_STUDENT_PROFILE_FIELDS: (keyof StudentType)[] = [
   "phoneNumber",
   "address",
 ];
+
 export const IMMUTABLE_STUDENT_PROFILE_FIELDS: (keyof StudentType)[] = [
   "studentId",
   "scientificDivision",
@@ -22,6 +23,7 @@ export const IMMUTABLE_STUDENT_PROFILE_FIELDS: (keyof StudentType)[] = [
   "birthPlace",
   "nationality",
 ];
+
 export const INSTRUCTOR_PROFILE_FIELDS: (keyof InstructorType)[] = [
   "fullName",
   "officeHours",
