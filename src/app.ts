@@ -8,6 +8,7 @@ import {
   employeeProfileRouter,
   instructorProfileRouter,
   studentsProfileRouter,
+  taProfileRouter,
 } from "./router";
 import { isDev } from "./env";
 import logger from "./core/logger";
@@ -55,6 +56,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/student-profile", studentsProfileRouter());
 app.use("/instructor-profile", instructorProfileRouter());
 app.use("/employee-profile", employeeProfileRouter());
+app.use("/ta-profile", taProfileRouter());
 
 // TODO: Custom 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {

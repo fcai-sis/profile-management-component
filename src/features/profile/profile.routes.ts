@@ -9,6 +9,21 @@ import getEmployeeProfileHandler from "./logic/handlers/getEmployeeProfile.handl
 import updateEmployeeProfileHandler from "./logic/handlers/updateEmployeeProfile.handler";
 import getInstructorProfileHandler from "./logic/handlers/getInstructorProfile.handler";
 import getStudentProfileHandler from "./logic/handlers/getStudentProfile.handler";
+import getTaProfileHandler from "./logic/handlers/getTaProfile.handler";
+import updateTaProfileHandler from "./logic/handlers/updateTaProfile.handler";
+
+export const taProfileRoutes = (router: Router) => {
+  router.get(
+    "/",
+    checkRole([Role.TEACHING_ASSISTANT]),
+    asyncHandler(getTaProfileHandler)
+  );
+  router.patch(
+    "/",
+    checkRole([Role.TEACHING_ASSISTANT]),
+    asyncHandler(updateTaProfileHandler)
+  );
+};
 
 export const instructorProfileRoutes = (router: Router) => {
   router.get(
