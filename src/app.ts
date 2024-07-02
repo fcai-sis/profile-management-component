@@ -58,9 +58,14 @@ app.use("/employee-profile", employeeProfileRouter());
 
 // TODO: Custom 404 handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(404).json({
+    errors: [
+      {
+        message: "Not found",
+      },
+    ],
+  });
 });
-
 // TODO: Custom error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.error(err.stack);
