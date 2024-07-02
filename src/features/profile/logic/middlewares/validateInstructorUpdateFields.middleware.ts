@@ -12,7 +12,7 @@
 //       )}`
 //     );
 
-//     // if the request body contains any field other than those in UPDATE_FIELDS, return an error
+//     // if the request body contains any field other than those in UPDATE_FIELDS, return an error 
 //     const allowedFields = INSTRUCTOR_PROFILE_FIELDS;
 //     const receivedFields = Object.keys(req.body);
 //     const invalidFields = receivedFields.filter(
