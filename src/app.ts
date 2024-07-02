@@ -12,6 +12,7 @@ import {
 import { isDev } from "./env";
 import logger from "./core/logger";
 import mongoose from "mongoose";
+import { ForeignKeyNotFound } from "@fcai-sis/shared-utilities";
 
 // Create Express server
 const app = express();
@@ -66,10 +67,25 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   // check the type of error and return the appropriate response
   if (err instanceof mongoose.Error.ValidationError) {
     return res.status(400).json({
-      message: err.message,
+      errors: [
+        {
+          message: err.message,
+        },
+      ],
+    });
+  } else if (err instanceof ForeignKeyNotFound) {
+    return res.status(400).json({
+      errors: [
+        {
+          message: err.message,
+          code: err.code,
+        },
+      ],
     });
   }
-  res.status(500).json({ message: "Something broke on our end" });
+  res.status(500).json({
+    errors: [{ message: "Something broke on our end" }],
+  });
 });
 
 export default app;

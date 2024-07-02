@@ -28,9 +28,11 @@ const updateInstructorProfileHandler = async (
 
   if (!instructorToBeUpdated) {
     return res.status(404).json({
-      error: {
-        message: "Instructor not found",
-      },
+      errors: [
+        {
+          message: "Instructor not found",
+        },
+      ],
     });
   }
 
@@ -41,9 +43,11 @@ const updateInstructorProfileHandler = async (
 
   if (!validFields) {
     return res.status(400).json({
-      error: {
-        message: "Invalid fields to update",
-      },
+      errors: [
+        {
+          message: "Invalid fields to update",
+        },
+      ],
     });
   }
 

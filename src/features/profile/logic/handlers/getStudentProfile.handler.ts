@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
-import { StudentModel, studentLocalizedFields } from "@fcai-sis/shared-models";
+import { StudentModel } from "@fcai-sis/shared-models";
 import {
   EDITABLE_STUDENT_PROFILE_FIELDS,
   IMMUTABLE_STUDENT_PROFILE_FIELDS,
@@ -26,9 +26,11 @@ const getStudentProfileHandler = async (req: HandlerRequest, res: Response) => {
 
   if (!student) {
     return res.status(404).send({
-      error: {
-        message: "Student not found",
-      },
+      errors: [
+        {
+          message: "Student not found",
+        },
+      ],
     });
   }
 

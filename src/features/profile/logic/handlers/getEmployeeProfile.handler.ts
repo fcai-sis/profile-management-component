@@ -26,9 +26,11 @@ const getEmployeeProfileHandler = async (
 
   if (!employee) {
     return res.status(404).send({
-      error: {
-        message: "Employee not found",
-      },
+      errors: [
+        {
+          message: "Employee not found",
+        },
+      ],
     });
   }
 

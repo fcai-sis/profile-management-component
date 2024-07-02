@@ -28,9 +28,11 @@ const updateEmployeeProfileHandler = async (
 
   if (!employeeToBeUpdated) {
     return res.status(404).json({
-      error: {
-        message: "Employee not found",
-      },
+      errors: [
+        {
+          message: "Employee not found",
+        },
+      ],
     });
   }
 
@@ -41,9 +43,11 @@ const updateEmployeeProfileHandler = async (
 
   if (!validFields) {
     return res.status(400).json({
-      error: {
-        message: "Invalid fields to update",
-      },
+      errors: [
+        {
+          message: "Invalid fields to update",
+        },
+      ],
     });
   }
 

@@ -26,9 +26,11 @@ const updateStudentProfileHandler = async (
   });
   if (!studentToBeUpdated) {
     return res.status(404).json({
-      error: {
-        message: "Student not found",
-      },
+      errors: [
+        {
+          message: "Student not found",
+        },
+      ],
     });
   }
 
@@ -39,9 +41,11 @@ const updateStudentProfileHandler = async (
 
   if (!validFields) {
     return res.status(400).json({
-      error: {
-        message: "Invalid fields to update",
-      },
+      errors: [
+        {
+          message: "Invalid fields to update",
+        },
+      ],
     });
   }
 
