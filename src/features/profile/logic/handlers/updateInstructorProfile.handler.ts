@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { INSTRUCTOR_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
+import { EDITABLE_INSTRUCTOR_PROFILE_FIELDS } from "../../data/UPDATE_PROFILE_FIELDS";
 import { InstructorModel, InstructorType } from "@fcai-sis/shared-models";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
 
@@ -38,7 +38,7 @@ const updateInstructorProfileHandler = async (
 
   // Check if the fields to be updated are valid
   const validFields = Object.keys(instructor).every((field) =>
-    INSTRUCTOR_PROFILE_FIELDS.includes(field as any)
+    EDITABLE_INSTRUCTOR_PROFILE_FIELDS.includes(field as any)
   );
 
   if (!validFields) {

@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { TokenPayload } from "@fcai-sis/shared-middlewares";
 import { InstructorModel } from "@fcai-sis/shared-models";
-import { INSTRUCTOR_PROFILE_FIELDS } from "../../../../features/profile/data/UPDATE_PROFILE_FIELDS";
+import {
+  EDITABLE_INSTRUCTOR_PROFILE_FIELDS,
+  IMMUTABLE_INSTRUCTOR_PROFILE_FIELDS,
+} from "../../../../features/profile/data/UPDATE_PROFILE_FIELDS";
 
 type HandlerRequest = Request<
   {},
@@ -34,14 +37,25 @@ const getInstructorProfileHandler = async (
     });
   }
 
-  const profileFields = INSTRUCTOR_PROFILE_FIELDS.map((field) => {
-    return {
-      [field]: instructor[field],
-    };
-  });
+  const editableProfileFields = EDITABLE_INSTRUCTOR_PROFILE_FIELDS.map(
+    (field) => {
+      return {
+        [field]: instructor[field],
+      };
+    }
+  );
+
+  const immutableProfileFields = IMMUTABLE_INSTRUCTOR_PROFILE_FIELDS.map(
+    (field) => {
+      return {
+        [field]: instructor[field],
+      };
+    }
+  );
 
   const response = {
-    profile: profileFields,
+    editableProfileFields,
+    immutableProfileFields,
   };
 
   return res.status(200).json(response);
