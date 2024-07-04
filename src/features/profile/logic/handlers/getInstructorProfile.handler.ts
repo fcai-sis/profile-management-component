@@ -25,7 +25,7 @@ const getInstructorProfileHandler = async (
 
   const instructor = await InstructorModel.findOne({
     user: user.userId,
-  });
+  }).populate("department");
 
   if (!instructor) {
     return res.status(404).send({

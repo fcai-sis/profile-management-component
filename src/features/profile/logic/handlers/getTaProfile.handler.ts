@@ -22,7 +22,7 @@ const getTaProfileHandler = async (req: HandlerRequest, res: Response) => {
 
   const teachingAssistant = await TeachingAssistantModel.findOne({
     user: user.userId,
-  });
+  }).populate("department");
 
   if (!teachingAssistant) {
     return res.status(404).send({
