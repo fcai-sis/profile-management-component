@@ -30,6 +30,7 @@ export const IMMUTABLE_INSTRUCTOR_PROFILE_FIELDS: (keyof InstructorType)[] = [
 export const EDITABLE_INSTRUCTOR_PROFILE_FIELDS: (keyof InstructorType)[] = [
   "fullName",
   "email",
+  "office",
   "officeHours",
 ];
 
@@ -40,6 +41,7 @@ export const IMMUTABLE_TA_PROFILE_FIELDS: (keyof TeachingAssistantType)[] = [
 export const EDITABLE_TA_PROFILE_FIELDS: (keyof TeachingAssistantType)[] = [
   "fullName",
   "email",
+  "office",
   "officeHours",
 ];
 
